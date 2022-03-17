@@ -2,7 +2,8 @@ import { useContext,useState, useEffect } from "react";
 import { StudentContext } from "../contexts/StudentContext";
 import { Button, Modal } from "react-bootstrap";
 import EditForm from "./EditForm";
-import ViewStudent from "./viewStudent";
+import ViewForm from "./ViewForm";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Student = ({student}) => {
@@ -22,7 +23,7 @@ const Student = ({student}) => {
         handleClose1();
     }, [student])
 
-
+    const navigate = useNavigate();
 
     return (
         < >
@@ -35,7 +36,7 @@ const Student = ({student}) => {
 			<td>
             <button onClick={handleShow} className="btn text-warning btn-act" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
 			<button onClick={() => deleteStudent(student.id)}  className="btn text-danger btn-act" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
-            <button onClick={handleShow1}  className="btn text-info btn-act" data-toggle="modal1"><i class="material-icon"  data-toggle="tooltip" title="view">View</i></button>
+            <Link to={`/student/${student.id}`}   className="btn text-info btn-act" data-toggle="modal1"><i className="material-icon"  data-toggle="tooltip" title="view">View</i></Link>
 			</td>
 
             <Modal show={show} onHide={handleClose}>
@@ -63,7 +64,7 @@ const Student = ({student}) => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ViewStudent theStudent={student}/>
+                    <ViewForm theStudent={student}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose1}>

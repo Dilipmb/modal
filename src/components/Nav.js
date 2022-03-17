@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet} from "react-router-dom";
+
 
 function Nav() {
   return (
@@ -8,6 +9,7 @@ function Nav() {
         <Link to="/">
           <h3>Home Page</h3>
         </Link>
+        
         <ul>
           <Link to="/login">
             <li>Login</li>

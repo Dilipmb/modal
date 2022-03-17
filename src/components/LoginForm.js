@@ -1,43 +1,54 @@
 import React, { useState } from "react";
-import { usePasswordValidation } from "../helpers/helper";
+import { usePasswordValidation } from "../helpers/helpers";
 import { Link } from "react-router-dom";
+import "../App"
+import auth from "./auth";
+import "../index.css"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+const LoginForm = ({ authenticate }) => {
+  // const adminUser = {
+  //   email: "rohith@admin.com",
+  //   password: "RohithS@123",
+  // };
+  const navigate = useNavigate();
+  const [user, setUser] = useState({ email: "" });
+  const [error, setError] = useState("");
 
-function LoginForm() {
-    const adminUser = {
-      email: "rohith@admin.com",
-      password: "RohithS@123",
-    };
+  // const Login = (details) => {
+  //   console.log(details);
+  //   if (
+  //     details.email === adminUser.email &&
+  //     details.password === adminUser.password
+  //   ) {
+  //     console.log("Logged in");
+  //     setUser({
+  //       email: details.email,
+  //     });
+  //     auth.login(() => {
+  //       props.history.push("/StudentList");
+  //     });
+  //   } else {
+  //     console.log("Details do not match!");
+  //     setError("Details do not match!");
+  //   }
+  // };
 
-    const [user, setUser] = useState({ email: "" });
-    const [error, setError] = useState("");
-
-    const Login = (details) => {
-      console.log(details);
-      if (
-        details.email === adminUser.email &&
-        details.password === adminUser.password
-      ) {
-        console.log("Logged in");
-        setUser({
-          email: details.email,
-        });
-        
-      } else {
-        console.log("Details do not match!");
-        setError("Details do not match!");
-      }
-    };
-
-    const Logout = () => {
-      console.log("Logout");
-      setUser({ email: "" });
-    };
+  // const Logout = () => {
+  //   console.log("Logout");
+  //   setUser({ email: "" });
+  //   auth.logout(() => {
+  //     props.history.push("/");
+  //   });
+  // };
   const [details, setDetails] = useState({ email: "", password: "" });
   const [passwordShown, setPasswordShown] = useState(true);
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    Login(details);
+  const submitHandler = (props) => {
+    props.history.push("/student");
   };
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
@@ -47,9 +58,12 @@ function LoginForm() {
     usePasswordValidation({
       password: details.password,
     });
-
+  const onClick = () => {
+    authenticate();
+    navigate("/student");
+  };
   return (
-    <form onSubmit={submitHandler}>
+    <form>
       <div className="form-inner">
         <h2>Login</h2>
         {error !== "" ? <div className="error">{error}</div> : ""}
@@ -79,9 +93,11 @@ function LoginForm() {
             <span className="material-icons">remove_red_eye</span>
           </i>
         </div>
-        <input type="submit" value="Login" />
+        <button onClick={onClick}>
+          <input className="btn btn-info my-1 " type="submit" value="Login" />
+        </button>
         <div>
-          <table class="center">
+          <table className="center">
             <tr>
               <td>
                 Length: {validLength ? <span>Done</span> : <span>False</span>}
@@ -113,6 +129,6 @@ function LoginForm() {
       </div>
     </form>
   );
-}
+};
 
 export default LoginForm;
