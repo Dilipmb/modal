@@ -27,8 +27,8 @@ const Student = ({student}) => {
 
     return (
         < >
-            <td>{student.firstName}</td>
-			<td>{student.lastName}</td>
+            <td>{student.first_name}</td>
+			<td>{student.last_name}</td>
 			<td>{student.email}</td>
 			<td>{student.mobile}</td>
             <td>{student.dob}</td>

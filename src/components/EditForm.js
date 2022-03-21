@@ -9,8 +9,8 @@ const EditForm = ({theStudent}) =>{
 
     const id = theStudent.id;
 
-    const [firstName, setFirstName] = useState(theStudent.firstName);
-    const [lastName, setLastName] = useState(theStudent.lastName);
+    const [first_name, setfirst_name] = useState(theStudent.first_name);
+    const [last_name, setlast_name] = useState(theStudent.last_name);
     const [email, setEmail] = useState(theStudent.email);
     const [mobile, setMobile] = useState(theStudent.mobile);
     const [dob, setDob] = useState(theStudent.dob);
@@ -18,7 +18,7 @@ const EditForm = ({theStudent}) =>{
 
     const {updateStudent} = useContext(StudentContext);
 
-    const updatedStudent ={ id, firstName, lastName, email, mobile, dob, address}
+    const updatedStudent ={ id, first_name, last_name, email, mobile, dob, address}
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -32,9 +32,9 @@ const EditForm = ({theStudent}) =>{
                 <Form.Control
                     type="text"
                     placeholder="First Name *"
-                    name="firstName"
-                    value={firstName}
-                    onChange={(e)=> setFirstName(e.target.value)}
+                    name="first_name"
+                    value={first_name}
+                    onChange={(e)=> setfirst_name(e.target.value)}
                     required
                 />
             </Form.Group>
@@ -42,9 +42,9 @@ const EditForm = ({theStudent}) =>{
                 <Form.Control
                     type="text"
                     placeholder="Last Name *"
-                    name="lastName"
-                    value={lastName}
-                    onChange={(e)=> setLastName(e.target.value)}
+                    name="last_name"
+                    value={last_name}
+                    onChange={(e)=> setlast_name(e.target.value)}
                     required
                 />
             </Form.Group>
@@ -69,7 +69,7 @@ const EditForm = ({theStudent}) =>{
             </Form.Group>
             <Form.Group>
                 <Form.Control
-                    type="text"
+                    type="date"
                     placeholder="dob"
                     name="dob"
                     value={dob}

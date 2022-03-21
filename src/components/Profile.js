@@ -5,6 +5,7 @@ import { StudentContext } from '../contexts/StudentContext';
 const Profile = () => {
     const { students } = useContext(StudentContext);
     let{id} = useParams();
+    
     let displayStudent=  students.filter((student)=>student.id == id)[0];
     
     
@@ -32,7 +33,7 @@ const Profile = () => {
                       className='img-fluid my-5'
                       style={{ width: '90px' }}
                     />
-                    <h5>{`${displayStudent.firstName} ${displayStudent.lastName}`}</h5>
+                    <h5>{`${displayStudent.first_name} ${displayStudent.last_name}`}</h5>
                     <p>Web Designer</p>
                     <i className='bi bi-pencil-square mb-5'></i>
                   </div>
@@ -46,7 +47,7 @@ const Profile = () => {
                           <p className='text-muted'>{displayStudent.email}</p>
                         </div>
                         <div className='col-6 mb-3'>
-                          <h6>Phone</h6>
+                          <h6>mobile</h6>
                           <p className='text-muted'>{displayStudent.mobile}</p>
                         </div>
                         <div className='col-6 mb-3'>

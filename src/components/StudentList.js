@@ -31,7 +31,7 @@ const StudentList = ({ logout }) => {
             >
               <span>Add Student</span>
             </Button>
-            <CSVLink className="btn btn-info my-1 me-5"data={students}>Download me</CSVLink>
+            <CSVLink className="btn btn-info my-1 me-5"data={students}>Export CSV</CSVLink>
 
             <button className="btn btn-danger my-1 me-5" onClick={logout}>Logout</button>
           </div>
@@ -43,7 +43,7 @@ const StudentList = ({ logout }) => {
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Email</th>
-						<th>Phone</th>
+						<th>mobile</th>
 						<th>DOB</th>
             <th>Address</th>
             <th>Actions</th>

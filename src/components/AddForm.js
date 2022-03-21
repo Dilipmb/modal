@@ -8,27 +8,49 @@ import { useContext, useState } from "react";
 const AddForm = () => {
   const { addStudent } = useContext(StudentContext);
   const [newStudent, setNewStudent] = useState({
-    name: "",
+    first_name: "",
+    last_name:"",
     email: "",
     address: "",
-    phone: "",
+    mobile: "",
+    dob:""
   });
   const onInputChange = (e) => {
     setNewStudent({ ...newStudent, [e.target.name]: e.target.value });
   };
-const { name, email, address,phone } = newStudent;
+const { first_name,last_name, email, mobile ,dob ,address} = newStudent;
 const handleSubmit = (e) => {
   e.preventDefault();
-  addStudent(name, email, address,phone);
+  addStudent(first_name,last_name, email, mobile ,dob ,address);
 };
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} data-testid="add-1">
+      <Form.Group >
+        <Form.Control
+          type="text"
+          placeholder="First Name *"
+          name="first_name"
+          value={first_name}
+          onChange={(e) => onInputChange(e)}
+          required
+        />
+      </Form.Group>
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Name *"
-          name="name"
-          value={name}
+          placeholder="Last Name *"
+          name="last_name"
+          value={last_name}
+          onChange={(e) => onInputChange(e)}
+          required
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Control
+          type="date"
+          placeholder="DOB"
+          name="dob"
+          value={dob}
           onChange={(e) => onInputChange(e)}
           required
         />
@@ -56,9 +78,9 @@ const handleSubmit = (e) => {
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Phone *"
-          name="phone"
-          value={phone}
+          placeholder="mobile *"
+          name="mobile"
+          value={mobile}
           onChange={(e) => onInputChange(e)}
           required
         />

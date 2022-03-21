@@ -1,32 +1,57 @@
+import axios from "axios";
 import { createContext, useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import * as XLSX from 'xlsx';
 
 export const StudentContext = createContext()
 
 const StudentContextProvider = (props) => {
+  const navigate = useNavigate()
 
-    const [students, setStudents] = useState([
-        {id:1,	firstName: 'Dilip', lastName: 'M B', email: 'Dilip@gmail.com', mobile: '9008297475' , dob: '1/3/2022', address: 'Bangalore'},
-        {id:2,	firstName: 'Chandan', lastName: 'M B', email: 'Chandan@gmail.com', mobile: '9008297375' , dob: '2/3/2022', address: 'Mangalore'},
-        {id:3,	firstName: 'Rohith', lastName: 'Kumar', email: 'Rohith@gmail.com', mobile: '8008297675' , dob: '3/3/2022', address: 'Bangalore'},
-        {id:4,	firstName: 'Diwin', lastName: 'K Y', email: 'Diwin@gmail.com', mobile: '7808297475' , dob: '4/3/2022', address: 'Mangalore'},
-    ])
+    const [students, setStudents] = useState([])
+    useEffect(() => {
+      
+    axios.get('http://localhost:5000/api/v1/student').then((res)=>{
+      setStudents(res.data.data);
+    })
+
+    }, [])
+    
     const [count, setCount] = useState(students.length+1);
 
 
-    const addStudent = async(firstName, lastName, email, mobile, dob, address) => {
-        await setCount(count+1);
-        await setStudents([...students, {id:count, firstName, lastName, email, mobile, dob, address}]);
-        console.log(students);
+    const addStudent = async(first_name, last_name, email, mobile, dob, address) => {
+      await axios.post('http://localhost:5000/api/v1/student',{first_name,last_name,email, mobile, dob, address}).then(
+        async(res) =>{
+          await axios.get('http://localhost:5000/api/v1/student').then(res=>{
+            setStudents(res.data.data);
+            navigate('/student');
+          })}
+      )  
     }
 
     const deleteStudent = (id) =>{
-        setStudents(students.filter(student => student.id !== id))
+      console.log(id)
+      axios.delete(`http://localhost:5000/api/v1/student/${id}`).then(
+        async(res) =>{
+          await axios.get('http://localhost:5000/api/v1/student').then(res=>{
+            setStudents(res.data.data);
+            navigate('/student');
+          })}
+      ) 
 
     }
 
     const updateStudent =(id, updatedStudent) => {
-        setStudents(students.map((student) => student.id === id ? updatedStudent : student))
+      console.log(id,updatedStudent);
+      let{first_name,last_name,email,mobile,address,dob} =updatedStudent;
+      axios.put(`http://localhost:5000/api/v1/student/${id}`,{first_name,last_name,email,mobile,address,dob}).then(
+        async(res) =>{
+          await axios.get('http://localhost:5000/api/v1/student').then(res=>{
+            setStudents(res.data.data);
+            navigate('/student');
+          })}
+      )
     }
     const processData = (dataString) => {
         const dataStringLines = dataString.split(/\r\n|\n/);

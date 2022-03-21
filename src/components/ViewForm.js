@@ -9,8 +9,8 @@ const ViewForm = ({theStudent}) =>{
 
     const id = theStudent.id;
 
-    const [firstName, setFirstName] = useState(theStudent.firstName);
-    const [lastName, setLastName] = useState(theStudent.lastName);
+    const [first_name, setfirst_name] = useState(theStudent.first_name);
+    const [last_name, setlast_name] = useState(theStudent.last_name);
     const [email, setEmail] = useState(theStudent.email);
     const [mobile, setMobile] = useState(theStudent.mobile);
     const [dob, setDob] = useState(theStudent.dob);
@@ -18,7 +18,7 @@ const ViewForm = ({theStudent}) =>{
 
     const {updateStudent} = useContext(StudentContext);
 
-    const updatedStudent ={ id, firstName, lastName, email, mobile, dob, address}
+    const updatedStudent ={ id, first_name, last_name, email, mobile, dob, address}
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -29,7 +29,7 @@ const ViewForm = ({theStudent}) =>{
 
         <div>
             <div>
-                <p>Name: {firstName + ' '+ lastName}</p>
+                <p>Name: {first_name + ' '+ last_name}</p>
                  <p>Email: {email}</p>
                 <p>mobile: {mobile}</p>
     <p>DOB: {dob}</p>

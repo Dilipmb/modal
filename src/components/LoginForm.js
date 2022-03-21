@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { usePasswordValidation } from "../helpers/helpers";
 import { Link } from "react-router-dom";
-import "../App"
+
 import auth from "./auth";
 import "../index.css"
+import '../login.css';
 import {
   BrowserRouter as Router,
   Routes,
@@ -64,7 +65,7 @@ const LoginForm = ({ authenticate }) => {
   };
   return (
     <form>
-      <div className="form-inner">
+      <div className="loginForm">
         <h2>Login</h2>
         {error !== "" ? <div className="error">{error}</div> : ""}
         <div className="form-group">
@@ -93,9 +94,7 @@ const LoginForm = ({ authenticate }) => {
             <span className="material-icons">remove_red_eye</span>
           </i>
         </div>
-        <button onClick={onClick}>
-          <input className="btn btn-info my-1 " type="submit" value="Login" />
-        </button>
+        
         <div>
           <table className="center">
             <tr>
@@ -125,6 +124,9 @@ const LoginForm = ({ authenticate }) => {
               </td>
             </tr>
           </table>
+          <button onClick={onClick}>
+          <input className="btn btn-info my-1 " type="submit" value="Login" />
+        </button>
         </div>
       </div>
     </form>
